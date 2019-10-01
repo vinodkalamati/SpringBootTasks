@@ -2,6 +2,7 @@ package com.stackroute.service;
 
 import com.stackroute.domain.Movie;
 import com.stackroute.repository.MovieRepository;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,8 +31,8 @@ public class MovieServiceImpl implements MovieService  {
     }
 
     @Override
-    public Movie getMovieById(int id) {
-        Movie movie=movieRepository.findById(id).orElse(new Movie());
+    public Movie getMovieById(int id) throws NotFoundException {
+        Movie movie=movieRepository.findById(id).orElseThrow(() -> new NotFoundException("No Movie found with Id  " + id));
         return movie;
     }
 
@@ -40,4 +41,13 @@ public class MovieServiceImpl implements MovieService  {
         movieRepository.deleteById(id);
         return true;
     }
+
+    @Override
+    public boolean updateMovie(Movie movie) throws NotFoundException {
+        Movie movie1=movieRepository.findById(movie.getId()).orElseThrow(() -> new NotFoundException("No Movie found with Id  " + movie.getId()));
+        movieRepository.save(movie);
+        return true;
+    }
+
+
 }

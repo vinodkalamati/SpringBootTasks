@@ -44,12 +44,41 @@ public class MovieController {
         }
         return responseEntity;
     }
+    @PutMapping("movie")
+    public ResponseEntity<?> updateMovie(@RequestBody Movie movie){
+        ResponseEntity responseEntity;
+        try {
+            movieService.updateMovie(movie);
+            responseEntity=new ResponseEntity<Movie>(movie, HttpStatus.ACCEPTED);
+        }
+        catch (Exception ex){
+            responseEntity=new ResponseEntity<String>(ex.getMessage(),HttpStatus.CONFLICT);
+        }
+        return responseEntity;
+    }
+
+
+    @DeleteMapping("movie")
+    public ResponseEntity<?> getDeleteById(@RequestBody int id){
+        ResponseEntity responseEntity;
+
+        try{
+            movieService.deleteMovie(id);
+            responseEntity=new ResponseEntity<String>("Successfully Deleted",HttpStatus.OK);
+        }
+        catch (Exception ex){
+            responseEntity=new ResponseEntity<String>("Movie Not found",HttpStatus.CONFLICT);
+        }
+        return responseEntity;
+    }
+
 
     @GetMapping("find")
-    public ResponseEntity<?> getMovieById(){
+    public ResponseEntity<?> getMovieById(@RequestBody int id){
         ResponseEntity responseEntity;
-        Movie movie=movieService.getMovieById(2);
+
         try{
+            Movie movie=movieService.getMovieById(id);
             responseEntity=new ResponseEntity<Movie>(movie,HttpStatus.FOUND);
         }
         catch (Exception ex){
@@ -58,18 +87,6 @@ public class MovieController {
         return responseEntity;
     }
 
-    @GetMapping("delete")
-    public ResponseEntity<?> getDeleteById(){
-        ResponseEntity responseEntity;
 
-        try{
-            movieService.deleteMovie(2);
-            responseEntity=new ResponseEntity<String>("Successfully Deleted",HttpStatus.OK);
-        }
-        catch (Exception ex){
-            responseEntity=new ResponseEntity<String>("Movie Not found",HttpStatus.CONFLICT);
-        }
-        return responseEntity;
-    }
 
 }
