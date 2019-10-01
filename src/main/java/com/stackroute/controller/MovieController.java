@@ -73,7 +73,7 @@ public class MovieController {
     }
 
 
-    @GetMapping("find")
+    @GetMapping("search")
     public ResponseEntity<?> getMovieById(@RequestBody int id){
         ResponseEntity responseEntity;
 
