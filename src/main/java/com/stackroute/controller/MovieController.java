@@ -1,6 +1,7 @@
 package com.stackroute.controller;
 
 import com.stackroute.domain.Movie;
+import com.stackroute.exceptions.MovieAlreadyExistsException;
 import com.stackroute.service.MovieService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +26,7 @@ public class MovieController {
             movieService.saveMovie(movie);
             responseEntity=new ResponseEntity("Successfully Created", HttpStatus.CREATED);
         }
-        catch (Exception ex){
+        catch (MovieAlreadyExistsException ex){
             responseEntity=new ResponseEntity<String>(ex.getMessage(),HttpStatus.CONFLICT);
         }
         return responseEntity;
@@ -73,7 +74,7 @@ public class MovieController {
     }
 
 
-    @GetMapping("search")
+    @GetMapping("movie/search")
     public ResponseEntity<?> getMovieById(@RequestBody int id){
         ResponseEntity responseEntity;
 
