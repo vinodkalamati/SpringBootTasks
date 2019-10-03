@@ -2,6 +2,7 @@ package com.stackroute.controller;
 
 import com.stackroute.domain.Movie;
 import com.stackroute.service.MovieService;
+import io.swagger.annotations.Api;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +30,7 @@ public class MovieController {
 
     //Retrieve Movie
     @GetMapping("movie")
+
     public ResponseEntity<?> getAllMovies(){
         List<Movie> retrievedMovie=movieService.getAllMovies();
         ResponseEntity responseEntity;
