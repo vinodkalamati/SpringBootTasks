@@ -45,5 +45,11 @@ public class MovieServiceImpl implements MovieService  {
         return true;
     }
 
+    @Override
+    public Movie getMovieByName(String movieTitle) {
+        Movie movie=movieRepository.getMovieByName(movieTitle);
+        return movie;
+    }
+
 
 }
