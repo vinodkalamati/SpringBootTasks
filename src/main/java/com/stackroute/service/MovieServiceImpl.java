@@ -23,7 +23,7 @@ public class MovieServiceImpl implements MovieService  {
     @Override
     public Movie saveMovie(Movie movie) throws MovieAlreadyExistsException {
         if (movieRepository.existsById(movie.getId()) || movie == null) {
-            throw new MovieAlreadyExistsException("Movie already exits unable to save");
+            throw new MovieAlreadyExistsException();
         } else {
             Movie movie1 = movieRepository.save(movie);
             return movie1;
@@ -43,7 +43,7 @@ public class MovieServiceImpl implements MovieService  {
         if (movieRepository.existsById(id)){
         movieRepository.deleteById(id);}
         else {
-            throw new MovieNotFoundException("No movie found with Id "+id);
+            throw new MovieNotFoundException();
         }
         return true;
     }
@@ -51,7 +51,7 @@ public class MovieServiceImpl implements MovieService  {
     //Update Movie
     @Override
     public boolean updateMovie(Movie movie) throws MovieNotFoundException {
-        Movie movie1=movieRepository.findById(movie.getId()).orElseThrow(()->new MovieNotFoundException("No movie found with Id "+movie.getId()));
+        Movie movie1=movieRepository.findById(movie.getId()).orElseThrow(()->new MovieNotFoundException());
         movieRepository.save(movie1);
         return true;
     }
@@ -62,7 +62,7 @@ public class MovieServiceImpl implements MovieService  {
         Movie movie=movieRepository.getMovieByName(movieTitle);
         if (movie==null)
         {
-            throw new MovieNotFoundException("No movie found with MovieTitle "+movieTitle);
+            throw new MovieNotFoundException();
         }
         return movie;
     }

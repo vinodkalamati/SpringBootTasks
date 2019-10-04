@@ -19,7 +19,7 @@ public class CommandLineSeed implements CommandLineRunner {
 
         @Override
         public void run(String... args) throws Exception {
-            Movie movie=new Movie(2,"Queen","Overview Comming Soon","Hindi");
+            Movie movie=new Movie(1,"Queen","Overview Comming Soon","Hindi");
             Movie movie1=new Movie(3,"Syeraa","Blockbuster Movie Cheeranjeevi","Telugu");
             movieRepository.save(movie);
             movieRepository.save(movie1);
