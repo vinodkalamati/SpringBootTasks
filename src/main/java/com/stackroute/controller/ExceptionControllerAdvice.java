@@ -1,9 +1,10 @@
-package com.stackroute.exceptions;
+package com.stackroute.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.context.request.WebRequest;
 
 import java.util.ArrayList;
@@ -17,14 +18,4 @@ public class ExceptionControllerAdvice {
         return new ResponseEntity<>("Internal Server Error", HttpStatus.CONFLICT);
     }
 
-    @ExceptionHandler(MovieAlreadyExistsException.class)
-    public ResponseEntity<Object> exception1(MovieAlreadyExistsException exception, WebRequest request){
-        return new ResponseEntity<>("Movie already Exists", HttpStatus.NOT_MODIFIED);
-    }
-
-    @ExceptionHandler(MovieNotFoundException.class)
-    public ResponseEntity<Object> exception2(MovieNotFoundException exception){
-
-        return new ResponseEntity<>("Movie Not Found",HttpStatus.NOT_FOUND);
-    }
 }

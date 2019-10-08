@@ -47,7 +47,7 @@ public class MovieController {
             responseEntity=new ResponseEntity<List<Movie>>(retrievedMovie,HttpStatus.OK);
         }
         catch (Exception ex){
-            responseEntity=new ResponseEntity<String>("Movie Not Found",HttpStatus.CONFLICT);
+            responseEntity=new ResponseEntity<String>(ex.getMessage(),HttpStatus.CONFLICT);
         }
         return responseEntity;
     }
@@ -81,8 +81,8 @@ public class MovieController {
         return responseEntity;
     }
 
-    @GetMapping("movie/search")
-    public ResponseEntity<?> getMovieByName(@RequestBody String movieTitle){
+    @GetMapping("movie/{movieTitle}")
+    public ResponseEntity<?> getMovieByName(@PathVariable("movieTitle") String movieTitle){
         ResponseEntity responseEntity;
         try{
             Movie movie=movieService.getMovieByName(movieTitle);
