@@ -18,6 +18,7 @@ public class Movie {
     @Id
     @ApiModelProperty(notes = "Id of the movie primary key")
     @GeneratedValue
+    @Getter
     int id;
     @ApiModelProperty(notes = "Title of the movie")
     String movieTitle;
