@@ -47,7 +47,7 @@ public class MovieController {
             responseEntity=new ResponseEntity<List<Movie>>(retrievedMovie,HttpStatus.OK);
         }
         catch (Exception ex){
-            responseEntity=new ResponseEntity<String>("Movie Not Found",HttpStatus.CONFLICT);
+            responseEntity=new ResponseEntity<String>(ex.getMessage(),HttpStatus.CONFLICT);
         }
         return responseEntity;
     }

@@ -8,6 +8,7 @@ import javax.persistence.Id;
 
 @Entity
 @ApiModel
+
 public class Movie {
     @Id
     @ApiModelProperty(notes = "Id of the movie primary key")
