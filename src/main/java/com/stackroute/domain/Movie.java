@@ -19,13 +19,13 @@ public class Movie {
     @ApiModelProperty(notes = "Id of the movie primary key")
     @GeneratedValue
     @Getter
-    int id;
+    private int id;
     @ApiModelProperty(notes = "Title of the movie")
-    String movieTitle;
+    private String movieTitle;
     @ApiModelProperty(notes = "overview of the movie")
-    String overview;
+    private String overview;
     @ApiModelProperty(notes = "Movie language")
-    String language;
+    private String language;
 
 
 }

@@ -17,7 +17,8 @@ import java.util.List;
 public class MovieController {
 
 //    @Qualifier("movieService") //if we use primary annotation no need of Qualifier
-    MovieService movieService;
+   private MovieService movieService;
+    ResponseEntity responseEntity;
 
     public MovieController(MovieService movieService) {
         this.movieService = movieService;
@@ -26,7 +27,6 @@ public class MovieController {
     //create Movie
     @PostMapping("movie")
     public ResponseEntity<?> saveMovie(@RequestBody Movie movie){
-        ResponseEntity responseEntity;
         try {
             movieService.saveMovie(movie);
             responseEntity=new ResponseEntity("Successfully Created", HttpStatus.CREATED);
@@ -34,6 +34,7 @@ public class MovieController {
         catch (MovieAlreadyExistsException ex){
             responseEntity=new ResponseEntity<String>(ex.getMessage(),HttpStatus.CONFLICT);
         }
+
         return responseEntity;
     }
 
@@ -43,7 +44,6 @@ public class MovieController {
     @GetMapping("movie")
     public ResponseEntity<?> getAllMovies(){
         List<Movie> retrievedMovie=movieService.getAllMovies();
-        ResponseEntity responseEntity;
         try{
             movieService.getAllMovies();
             responseEntity=new ResponseEntity<List<Movie>>(retrievedMovie,HttpStatus.OK);
@@ -57,7 +57,6 @@ public class MovieController {
     //Update Movie
     @PutMapping("movie")
     public ResponseEntity<?> updateMovie(@RequestBody Movie movie){
-        ResponseEntity responseEntity;
         try {
             movieService.updateMovie(movie);
             responseEntity=new ResponseEntity<Movie>(movie, HttpStatus.ACCEPTED);
@@ -71,7 +70,6 @@ public class MovieController {
     //DeleteMovie
     @DeleteMapping("movie")
     public ResponseEntity<?> getDeleteById(@RequestBody int id){
-        ResponseEntity responseEntity;
 
         try{
             movieService.deleteMovie(id);
@@ -85,7 +83,6 @@ public class MovieController {
 
     @GetMapping("movie/{movieTitle}")
     public ResponseEntity<?> getMovieByName(@PathVariable("movieTitle") String movieTitle){
-        ResponseEntity responseEntity;
         try{
             Movie movie=movieService.getMovieByName(movieTitle);
             responseEntity=new ResponseEntity<Movie>(movie,HttpStatus.FOUND);
